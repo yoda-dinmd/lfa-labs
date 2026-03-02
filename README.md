@@ -4,6 +4,7 @@ This repository contains the laboratory works for the **Formal Languages & Finit
 
 ## Repository Structure
 * **Lab 1:** Introduction to Formal Languages, Regular Grammars, and Finite Automata.
+* **Lab 2:** Determinism in Finite Automata. Conversion from NDFA to DFA. Chomsky Hierarchy.
 
 
 ## Technology Stack
