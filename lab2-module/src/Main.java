@@ -3,7 +3,40 @@ import java.util.*;
 // MAIN CLASS
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== VARIANT 12 NDFA ===\n");
+        System.out.println("=== LAB 1 & 2 COMBINED: VARIANT 12 ===\n");
+
+        // ============ LAB 1: Grammar Generation and Conversion to FA ============
+        System.out.println("--- LAB 1: Grammar to FA Conversion ---\n");
+        
+        Grammar grammar = new Grammar();
+        grammar.initGrammar();
+        
+        System.out.println(grammar);
+        System.out.println("\n=== Generated Strings from Grammar ===\n");
+        
+        List<String> generatedWords = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            generatedWords.add(grammar.generateString());
+        }
+        
+        System.out.println("\nGenerated Words: " + generatedWords);
+        
+        // Convert Grammar to FA
+        FiniteAutomaton faFromGrammar = grammar.toFiniteAutomaton();
+        System.out.println("\n=== FA from Grammar (Deterministic) ===\n");
+        System.out.println(faFromGrammar);
+        System.out.println("Is Deterministic? " + faFromGrammar.isDeterministic());
+        
+        // Validate generated words
+        System.out.println("\n=== Validating Generated Words on FA ===\n");
+        for (String word : generatedWords) {
+            boolean valid = faFromGrammar.accepts(word);
+            System.out.println("Word \"" + word + "\" -> " + (valid ? "Accepted" : "Rejected"));
+        }
+        
+        // ============ LAB 2: NDFA, Determinism, Conversion ============
+        System.out.println("\n\n--- LAB 2: NDFA, Determinism, and Conversion ---\n");
+        System.out.println("=== Variant 12 NDFA ===\n");
 
         // Create NDFA for Variant 12
         FiniteAutomaton ndfa = new FiniteAutomaton();
@@ -59,13 +92,13 @@ public class Main {
         System.out.println();
 
         // Convert NDFA to Grammar
-        System.out.println("\n=== CONVERSION TO GRAMMAR ===\n");
-        Grammar grammar = ndfa.toGrammar();
-        System.out.println(grammar);
+        System.out.println("\n=== CONVERSION TO GRAMMAR FROM NDFA ===\n");
+        Grammar grammarFromNDFA = ndfa.toGrammar();
+        System.out.println(grammarFromNDFA);
 
         // Convert DFA to Grammar
         System.out.println("\nGrammar from DFA:");
-        Grammar dfaGrammar = dfa.toGrammar();
-        System.out.println(dfaGrammar);
+        Grammar grammarFromDFA = dfa.toGrammar();
+        System.out.println(grammarFromDFA);
     }
 }
